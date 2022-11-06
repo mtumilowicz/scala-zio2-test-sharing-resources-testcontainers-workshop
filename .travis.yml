@@ -9,7 +9,8 @@ scala:
   - 2.13.10
 
 before_install:
-  - chmod +x ./scripts/run-tests.sh
+  - sbt ++"$TRAVIS_SCALA_VERSION" publishLocalAll
+  - docker-compose up -d
 
 script:
-  - ./scripts/run-tests.sh
+  - sbt ++"$TRAVIS_SCALA_VERSION" test && sbt ++"$TRAVIS_SCALA_VERSION" it:test

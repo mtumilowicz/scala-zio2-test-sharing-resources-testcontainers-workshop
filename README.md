@@ -56,6 +56,7 @@
     * https://docs.scala-lang.org/overviews/plugins/index.html
     * https://github.com/oleg-py/better-monadic-for
     * https://github.com/typelevel/kind-projector
+    * https://docs.travis-ci.com/user/job-lifecycle/#customizing-the-build-phase
 
 ## preface
 * goals of this workshop
