@@ -8,5 +8,8 @@ services:
 scala:
   - 2.13.10
 
+before_install:
+  - chmod +x build.sh
+
 script:
   - ./scripts/run-tests.sh
