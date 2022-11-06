@@ -81,6 +81,13 @@
         * how to use them
     * zio tests
         * sharing layers inside the suite and across suites
+* project
+    * to run IT tests
+        * run docker desktop
+        * publishLocal order and customer
+            * `publishLocalAll` in sbt shell
+        * `docker-compose up -d` in the terminal (root directory)
+        * `it:test` in sbt shell
 * workshops
     * task1
         1. modify OrderContainer to log a message after it is started
@@ -612,7 +619,7 @@ can run in a Docker container
             * example
                 * using Scala 2.13.3 you can use a library that was compiled using 2.13.0 or 2.13.4 but not
                 one compiled using 2.12.12
-    * `cross` metod
+    * `cross` method
         * equivalent
             ```
             "a" % "b" % "1.0"
@@ -622,7 +629,7 @@ can run in a Docker container
             "a" %% "b" % "1.0"
             ("a" % "b" % "1.0").cross(CrossVersion.binary)
             ```
-        * always use full Scala version instead of the binary Scala version:
+        * set full Scala version instead of the binary Scala version:
             ```
             ("a" % "b" % "1.0").cross(CrossVersion.full)
             ```
