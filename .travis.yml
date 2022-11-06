@@ -9,7 +9,7 @@ scala:
   - 2.13.10
 
 before_install:
-  - chmod +x build.sh
+  - chmod +x ./scripts/run-tests.sh
 
 script:
   - ./scripts/run-tests.sh
