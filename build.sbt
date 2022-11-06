@@ -26,7 +26,7 @@ lazy val order = (project in file("order"))
     dockerBaseImage := "openjdk:11-jre-slim-buster",
     dockerExposedPorts ++= Seq(8080),
     dockerUpdateLatest := true,
-    dockerCommands ++= DockerCommands.installCurl,
+//    dockerCommands ++= DockerCommands.installCurl,
   )
   .dependsOn(`order-http-api` % "compile->compile;test->test")
 
@@ -50,7 +50,7 @@ lazy val customer = (project in file("customer"))
     dockerBaseImage := "openjdk:11-jre-slim-buster",
     dockerExposedPorts ++= Seq(8080),
     dockerUpdateLatest := true,
-    dockerCommands ++= DockerCommands.installCurl,
+//    dockerCommands ++= DockerCommands.installCurl,
     unusedCompileDependenciesFilter -= moduleFilter("com.softwaremill.sttp.client3", "async-http-client-backend-zio"),
   )
   .dependsOn(
