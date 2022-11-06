@@ -15,7 +15,7 @@ import zio.{ Scope, Task, ZIO }
 object CustomerSpec extends ZIOSpecDefault {
   override def spec: Spec[TestEnvironment with Scope, Any] =
     suite("CustomerSpec")(
-      test("get ") {
+      test("get customers") {
         val expectedJson =
           json"""
             {

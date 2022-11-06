@@ -8,8 +8,8 @@ import zio.test._
 
 object OrderHttpSpec extends ZIOSpecDefault {
   override def spec =
-    suite("a")(
-      test("b") {
+    suite("OrderHttpSpec")(
+      test("get order") {
         for {
           url            <- ZIO.fromEither(URL.fromString("/orders"))
           response       <- OrderHttpFacade.endpoints(Request(url = url))
