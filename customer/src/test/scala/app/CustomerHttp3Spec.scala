@@ -10,31 +10,24 @@ import zio.test._
 
 object CustomerHttp3Spec extends SharedOrderContainerSpec {
   override def spec =
-    suite("a")(
-      test("b") {
+    suite("CustomerHttp3Spec")(
+      test("get order 1") {
         for {
           orderService <- ZIO.service[OrderService]
           response     <- orderService.getOrder
         } yield assert(response)(equalTo(OrderApiOutput("orderId")))
       },
-      test("c") {
+      test("get order 2") {
         for {
           orderService <- ZIO.service[OrderService]
           response     <- orderService.getOrder
         } yield assert(response)(equalTo(OrderApiOutput("orderId")))
       },
-      test("d") {
+      test("get order 3") {
         for {
           orderService <- ZIO.service[OrderService]
           response     <- orderService.getOrder
         } yield assert(response)(equalTo(OrderApiOutput("orderId")))
-      },
-      test("e") {
-        def getCounts: UIO[(Int, Int)] = ZIO.succeed((1, 3))
-
-        for {
-          (x, y) <- getCounts
-        } yield assert(x + y)(equalTo(4))
       },
     ).provideSome[Scope with OrderContainer](OrderService.layer, HttpClientZioBackend.layer(), testCustomerAppConfig)
 

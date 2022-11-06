@@ -9,7 +9,8 @@ object CustomerHttpFacade {
     case Method.GET -> !! / "customers" =>
       for {
         orderService <- ZIO.service[OrderService]
-        response     <- orderService.getOrder
-      } yield Response.json(response.toJson)
+        order        <- orderService.getOrder
+        apiOutput = CustomerApiOutput("customerId", order)
+      } yield Response.json(apiOutput.toJson)
   }
 }

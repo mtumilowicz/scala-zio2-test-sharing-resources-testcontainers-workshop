@@ -14,22 +14,27 @@ import zio.{ Scope, Task, ZIO }
 
 object CustomerSpec extends ZIOSpecDefault {
   override def spec: Spec[TestEnvironment with Scope, Any] =
-    suite("aa")(
-      test("bb") {
+    suite("CustomerSpec")(
+      test("get ") {
         val expectedJson =
           json"""
-                {"id":  "orderId"}
+            {
+              "customerId": "customerId",
+              "order": {
+                "id": "orderId"
+              }
+            }
               """
         for {
           client   <- ZIO.service[SttpBackend[Task, ZioStreams with WebSockets]]
-          response <- execute(client)
+          response <- getCustomers(client)
         } yield assert(asJson(response))(equalTo(expectedJson))
       },
     ).provide(IntegrationTestConfig.layer, HttpClientZioBackend.layer())
 
   private def asJson(response: String): Json = parse(response).getOrElse(Json.Null)
 
-  private def execute(httpClient: SttpBackend[Task, ZioStreams with WebSockets]) = {
+  private def getCustomers(httpClient: SttpBackend[Task, ZioStreams with WebSockets]) = {
 
     for {
       config <- ZIO.service[IntegrationTestConfig]
