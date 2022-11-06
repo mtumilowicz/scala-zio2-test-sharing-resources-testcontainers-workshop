@@ -9,4 +9,4 @@ scala:
   - 2.13.10
 
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION order / Docker / publishLocal
+  - sbt ++$TRAVIS_SCALA_VERSION order/Docker/publishLocal && sbt ++$TRAVIS_SCALA_VERSION test
