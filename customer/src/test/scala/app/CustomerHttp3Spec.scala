@@ -41,12 +41,6 @@ object CustomerHttp3Spec extends SharedOrderContainerSpec {
           apiOutput <- ZIO.fromEither(CustomerApiOutput.codec.decoder.decodeJson(body))
         } yield assert(apiOutput)(equalTo(expectedApiOutput))
       },
-    ).provideSome[Scope with OrderContainer](OrderService.layer, HttpClientZioBackend.layer(), testCustomerAppConfig)
-
-  val testCustomerAppConfig = ZLayer.fromZIO {
-    for {
-      orderTestContainer <- ZIO.service[OrderContainer]
-    } yield CustomerAppConfig(1, OrderServiceConfig.from(orderTestContainer))
-  }
+    ).provideSome[Scope with OrderContainer](OrderService.layer, HttpClientZioBackend.layer(), TestAppConfig.live)
 
 }

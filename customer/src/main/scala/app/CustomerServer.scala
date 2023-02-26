@@ -15,7 +15,7 @@ object CustomerServer extends ZIOAppDefault {
     _      <- Server.start(config.port, CustomerHttpFacade.endpoints)
   } yield ExitCode.success)
     .provideSome(
-      CustomerAppConfig.layer,
+      CustomerAppConfig.live,
       OrderService.layer,
       HttpClientZioBackend.layer(),
     )

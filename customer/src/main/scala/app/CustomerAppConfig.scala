@@ -1,7 +1,6 @@
 package app
 
 import eu.timepit.refined.types.net.PortNumber
-import testcontainers.OrderContainer
 import zio.config.magnolia.descriptor
 import zio.config.refined._
 import zio.config.typesafe.TypesafeConfigSource
@@ -13,14 +12,6 @@ case class OrderServiceConfig(
     port: PortNumber,
 )
 
-object OrderServiceConfig {
-  def from(orderTestContainer: OrderContainer): OrderServiceConfig =
-    OrderServiceConfig(
-      "http://" + orderTestContainer.host,
-      PortNumber.unsafeFrom(orderTestContainer.externalPort),
-    )
-}
-
 case class CustomerAppConfig(
     port: PortNumber,
     orderServiceConfig: OrderServiceConfig,
@@ -31,7 +22,7 @@ object CustomerAppConfig {
   implicit val orderServiceConfig = descriptor[OrderServiceConfig]
   implicit val customerAppConfig  = descriptor[CustomerAppConfig]
 
-  val layer: Layer[ReadError[String], CustomerAppConfig] =
+  val live: Layer[ReadError[String], CustomerAppConfig] =
     ZLayer {
       zio.config.read {
         descriptor[CustomerAppConfig]

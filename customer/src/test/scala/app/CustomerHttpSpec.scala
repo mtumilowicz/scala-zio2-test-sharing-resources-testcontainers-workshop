@@ -42,12 +42,6 @@ object CustomerHttpSpec extends ZIOSpecDefault {
         } yield assert(apiOutput)(equalTo(expectedApiOutput))
       },
     ).provideSome[Scope with CustomerAppConfig](OrderService.layer, HttpClientZioBackend.layer())
-      .provideSomeShared(OrderContainer.live, testCustomerAppConfig)
-
-  val testCustomerAppConfig = ZLayer.fromZIO {
-    for {
-      orderTestContainer <- ZIO.service[OrderContainer]
-    } yield CustomerAppConfig(1, OrderServiceConfig.from(orderTestContainer))
-  }
+      .provideSomeShared(OrderContainer.live, TestAppConfig.live)
 
 }
