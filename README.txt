@@ -119,6 +119,16 @@
 ## sbt build
 * defined in `build.sbt`
     * consists set of subproject
+    * sbt is recursive
+        * `build.sbt` conceals how sbt really works
+            * sbt builds are defined with Scala code and that code, itself, has to be built
+        * `project` directory is another build inside your build
+            * knows how to build your build
+            * projects inside the metabuild can do anything any other project can do
+                * you can tweak the build definition of the build definition project, by creating a `project/project/` directory
+        * to distinguish the builds we sometimes use the term
+            * proper build to refer to your build
+            * meta-build to refer to the build in project
 * example
     ```
     lazy val root = (project in file(".")) // lazy vals to avoid initialization order problems
